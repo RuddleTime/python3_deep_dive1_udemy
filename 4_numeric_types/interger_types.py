@@ -1,3 +1,9 @@
+"""
+Udemy course: Python 3: Deep Dive (Part 1)
+Section 4: Numeric Types
+Part 29: Intergers: Data Types 
+"""
+
 import sys
 import time
 
