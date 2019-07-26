@@ -39,7 +39,7 @@ print(x.denominator)  # prints 4
 # has a finite precision
 
 # Looking at irrational numbers
-import math
+import math  # nopep8
 x = Fraction(math.pi)
 print(x)  # prints 884279719003555/281474976710656
 x = Fraction(math.sqrt(2))
