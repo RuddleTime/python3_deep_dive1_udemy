@@ -139,7 +139,11 @@ rounded_x = math.copysign(1, x) * int(math.fabs(x)+0.5)
 print(rounded_x)
 # Simplier implementation:
 def round_away_from_zero(x):
+    """
+    Rounding to an int value
+    """
     return int(x + math.copysign(0.5, x))
+
 rounded_x = round_away_from_zero(x)
 print(rounded_x)
 x = -10.5
