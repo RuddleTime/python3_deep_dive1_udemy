@@ -17,6 +17,11 @@ a = float(10)
 b = float(10.4)
 c = float("12.5")
 
+"""
+Equality Testing
+"""
+print("\n\nEquality Testing\n")
+
 # Looking at issue where a number (eg. 0.1) is finite in base 10 
 # but not so in base 2
 x = 0.1
@@ -65,7 +70,10 @@ y = 0.02
 check_same = math.isclose(x, y, rel_tol=1e-5, abs_tol=1e-5)
 print(check_same)  # Prints False
 
-
+"""
+Coercing float -> int
+"""
+print('\n\nCoercing with trunc, floor and ceil\n')
 
 # Coercing float to int, which will result in data loss
 # Python options: truncation, floor, ceiling, rounding
@@ -81,9 +89,62 @@ print(math.floor(-10.5))  # XXX: Prints -11
 print(math.ceil(10.5))  # Prints 11
 print(math.ceil(-10.5))  # XXX: Prints -10
 
+"""
+Rounding of floats
+"""
 
+# Use built in round(x, n=0) funtion
+# x=number to be rounded
+# n -> 10**-n
 
+print('\n\nRounding\n')
 
+print(round(10.4), type(round(10.4)))  # Prints 10, int
+print(round(-10.4), type(round(-10.4)))  # Prints -10, int
+print(round(10.8), type(round(10.8)))  # Prints 11, int
+print(round(-10.8), type(round(-10.8)))  # Prints -11, int
+
+# If n is specified, a float is returned
+# The zero below is 10 to power of -0, so 1. Rounding to 
+# powers of 10.
+print(round(10.4, 0), type(round(10.4, 0)))  # Prints 10.0, float 
+
+# Note: negitive n allows us to round to 10s, 100s, 1000s, etc.
+#       positive n allows us to round to .1s, .01s, 0.001s, etc
+
+# Looking at ties
+x = 1.25  # Half way between 1.2 and 1.3
+print(round(1.25, 1))  # Prints 1.2!!!!
+print(round(1.35, 1))  # Prints 1.4
+print(round(-1.25, 1))  # Prints -1.2
+print(round(-1.35, 1))  # Prints -1.4
+
+# XXX: The above is explained in IEEE 754 standard: round to the nearest
+#      value, with ties rounded to the nearest value with an *even*
+#      least significant digit 
+#      This is called "Banker's Rounding"
+
+"""
+Force rounding to be away from zero
+"""
+
+# More correct way than standard of adding 0.5 and truncating
+# Steps: 1. Take abs value
+#        2. Add 0.5
+#        3. Convert to int
+#        4. Put back orginal sign
+
+x = 10.25
+rounded_x = math.copysign(1, x) * int(math.fabs(x)+0.5)
+print(rounded_x)
+# Simplier implementation:
+def round_away_from_zero(x):
+    return int(x + math.copysign(0.5, x))
+rounded_x = round_away_from_zero(x)
+print(rounded_x)
+x = -10.5
+rounded_x = round_away_from_zero(x)
+print(rounded_x, round(-10.5))  # Prints -11, -10
 
 
 
